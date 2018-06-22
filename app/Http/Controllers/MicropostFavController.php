@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class UserFollowController extends Controller
+class MicropostFavController extends Controller
 {
-    public function store($id) 
+    public function store($id)
     {
-        //$request
-        
-        \Auth::user()->follow($id);
+        \Auth::user()->fav($id);
         return redirect()->back();
-
     }
     
     public function destroy($id)
     {
-        \Auth::user()->unfollow($id);
+        \Auth::user()->unfav($id);
         return redirect()->back();
     }
+    
+    
+    
 }

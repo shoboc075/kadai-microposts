@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\User; // add
 
-class UsersController extends Controller
+class UserController extends Controller
 {
     public function index()
     {
@@ -26,14 +26,15 @@ class UsersController extends Controller
             'user' => $user,
             'microposts' => $microposts,
         ];
+        
 
         $data += $this->counts($user);
 
         return view('users.show', $data);
-        }
+    }
     
-        public function followings($id)
-        {
+    public function followings($id)
+    {
         $user = User::find($id);
         $followings = $user->followings()->paginate(10);
 
@@ -45,11 +46,11 @@ class UsersController extends Controller
         $data += $this->counts($user);
 
         return view('users.followings', $data);
-        }
+    }
 
 
-        public function followers($id)
-        {
+    public function followers($id)
+    {
         $user = User::find($id);
         $followers = $user->followers()->paginate(10);
 
@@ -61,5 +62,23 @@ class UsersController extends Controller
         $data += $this->counts($user);
 
         return view('users.followers', $data);
-        }
+    }
+
+    
+    public function favorited($id)
+    {
+        
+        $user = User::find($id);
+        
+        $data = [
+            'user' => $user,
+            'microposts' => $user -> favorite()->paginate(10),
+            ];
+        
+        $data += $this->counts($user);
+        
+        return view('users.fav', $data);
+    }
+    
+    
 }
