@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('fav', 'MicropostFavController@store')->name('micropost.fav');
         Route::delete('unfav', 'MicropostFavController@destroy')->name('micropost.unfav');
         Route::get('favoritedMicropost', 'UserController@favorited')->name('users.fav');
+        
         });
 
     Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
